@@ -7,18 +7,13 @@
       <img src="/img/sharks/shark_dark_blue.png" class="shark shark1"/>
       <img src="/img/sharks/shark_dark_blue.png" class="shark shark3"/>
       <img src="/img/sharks/shark_dark_blue_reverse.png" class="shark shark4"/>
-      <img src="img/props/cloud_transparent.png" class="cloud cloud1" />
-      <img src="img/props/cloud_transparent.png" class="cloud cloud2" />
-      <img src="img/props/cloud_transparent.png" class="cloud cloud3" />
-      <img src="img/props/cloud_transparent.png" class="cloud cloud6_" />
-      <img src="img/props/cloud_transparent.png" class="cloud cloud4" />
-      <img src="img/props/cloud_transparent.png" class="cloud cloud5" />
-      <img src="img/props/cloud_transparent.png" class="cloud cloud6" />
-      <img src="img/props/cloud_transparent.png" class="cloud cloud1_" />
-      <img src="img/props/cloud_transparent.png" class="cloud cloud2_" />
-      <img src="img/props/cloud_transparent.png" class="cloud cloud3_" />
-      <img src="img/props/cloud_transparent.png" class="cloud cloud4_" />
-      <img src="img/props/cloud_transparent.png" class="cloud cloud5_" />
+      <img id="cloud1" src="img/props/cloud_transparent.png" class="cloud cloud1" />
+      <img id="cloud2" src="img/props/cloud_transparent.png" class="cloud cloud2" />
+      <img id="cloud3" src="img/props/cloud_transparent.png" class="cloud cloud3" />
+      <img id="cloud4" src="img/props/cloud_transparent.png" class="cloud cloud4" />
+      <img id="cloud5" src="img/props/cloud_transparent.png" class="cloud cloud5" />
+      <img id="cloud6" src="img/props/cloud_transparent.png" class="cloud cloud6" />
+      
       <img src="img/props/coconut_tree_transparent.png" class="coconut-tree" />
       <div class="text-container" >
         <div class="d-flex justify-content-center">
@@ -37,13 +32,15 @@
               </div>
             </div>
           </a>
-          <div class="hero-button mx-4">
-            <div class="d-flex justify-content-center px-3">
-              <!-- scroll down to how to join -->
-              <img class="my-auto" src="/img/logos/discord_white.png" style="height:20px">
-              <label class="m-2 open-sans" style="font-size: 20px;color:white">Discord</label> 
+          <a href="https://discord.com/invite/oh-geez" style="text-decoration:none">
+            <div class="hero-button mx-4">
+              <div class="d-flex justify-content-center px-3">
+                <!-- scroll down to how to join -->
+                <img class="my-auto" src="/img/logos/discord_white.png" style="height:20px">
+                <label class="m-2 open-sans" style="font-size: 20px;color:white">Discord</label> 
+              </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
 
@@ -126,14 +123,43 @@ export default {
   data() {
     return {
       screenWidth: screen.width,
+      windowWidth: window.outerWidth,
       windowHeight: window.innerHeight,
       shark: "/img/sharks/1.png",
+      cloud1initialX: '200px',
+      cloud2nitialX: '300px',
+      cloud3initialX: '500px',
+      cloud4initialX: '100px',
+      cloud5initialX: '600px',
+      cloud6initialX: '750px',
+
     }
   },
   created() {
     window.console.log(this.screenWidth)
     window.console.log(this.windowHeight)
     this.loopImage()
+
+  },
+  mounted(){
+
+    document.getElementById('cloud1').style.right = this.cloud1initialX
+    document.getElementById('cloud2').style.right = this.cloud2initialX
+    document.getElementById('cloud3').style.right = this.cloud3initialX
+    document.getElementById('cloud4').style.right = this.cloud4initialX
+    document.getElementById('cloud5').style.right = this.cloud5initialX
+    document.getElementById('cloud6').style.right = this.cloud6initialX
+    document.getElementById('cloud1').style.width = '100px'
+    document.getElementById('cloud2').style.width = '200px'
+    document.getElementById('cloud3').style.width = '300px'
+    document.getElementById('cloud4').style.width = '50px'
+    document.getElementById('cloud5').style.width = '60px'
+    document.getElementById('cloud6').style.width = '120px'
+    this.updateClouds()
+
+    
+    // cloud1.style.right
+    // window.console.log(cloud1.style)
 
   },
   methods: {
@@ -146,8 +172,26 @@ export default {
 
         this.shark = "img/sharks/" + i + ".png"
         i = i + 1
-        window.console.log(this.shark)
       }, 300)
+    },
+    updateClouds(){
+      setInterval(() => {
+        var clouds = Array.from(document.getElementsByClassName('cloud'))
+        for(var i=0;i<clouds.length;i++){
+          var cloud = clouds[i]
+          if (parseInt(this.removePx(cloud.style.right)) < -(parseInt(this.removePx(cloud.style.width)))){
+            cloud.style.right = this.windowWidth + 'px'
+          }
+          
+          var right = this.removePx(cloud.style.right)
+          cloud.style.right = (right - 1) + 'px'
+        }
+
+
+      }, 10)
+    },
+    removePx(str){
+      return str.slice(0, str.length - 2)
     }
   }
 }
@@ -261,28 +305,8 @@ export default {
   animation-timing-function:linear;
 }
 
-.cloud1_ {
-  right: 1736px;
-  top: 100px;
-  width: 100px;
-  animation-name:cloud1_-animation;
-  animation-duration: 45s;
-  animation-iteration-count: infinite;
-  animation-timing-function:linear;
 
-}
 
-@keyframes cloud1-animation {
-  to {
-    right: -1335px
-  }
-}
-
-@keyframes cloud1_-animation {
-  to {
-    right: 200px
-  }
-}
 
 .cloud2 {
   right: 300px;
@@ -294,27 +318,7 @@ export default {
   animation-timing-function:linear;
 }
 
-.cloud2_ {
-  right: 1836px;
-  top: 250px;
-  width: 200px;
-  animation-name:cloud2_-animation;
-  animation-duration: 30s;
-  animation-iteration-count: infinite;
-  animation-timing-function:linear;
-}
 
-@keyframes cloud2-animation {
-  to {
-    right: -1235px
-  }
-}
-
-@keyframes cloud2_-animation {
-  to {
-    right: 300px
-  }
-}
 
 .cloud3 {
   right: 500px;
@@ -326,27 +330,8 @@ export default {
   animation-timing-function:linear;
 }
 
-.cloud3_ {
-  right: 2036px;
-  top: 50px;
-  width: 300px;
-  animation-name:cloud3_-animation;
-  animation-duration: 15s;
-  animation-iteration-count: infinite;
-  animation-timing-function:linear;
-}
-@keyframes cloud3-animation {
 
-  to {
-    right: -1035px
-  }
-}
 
-@keyframes cloud3_-animation {
-  to {
-    right: 500px
-  }
-}
 
 .cloud4 {
   right: 100px;
@@ -358,27 +343,7 @@ export default {
   animation-timing-function:linear;
 }
 
-.cloud4_ {
-  right: 1636px;
-  top: 400px;
-  width: 50px;
-  animation-name:cloud4_-animation;
-  animation-duration: 60s;
-  animation-iteration-count: infinite;
-  animation-timing-function:linear;
-}
 
-@keyframes cloud4-animation {
-  to {
-    right: -1435px
-  }
-}
-
-@keyframes cloud4_-animation {
-  to {
-    right: 100px
-  }
-}
 
 .cloud5 {
   right: 600px;
@@ -390,27 +355,8 @@ export default {
   animation-timing-function:linear;
 }
 
-.cloud5_ {
-  right: 2136px;
-  top: 400px;
-  width: 60px;
-  animation-name:cloud5_-animation;
-  animation-iteration-count: infinite;
-  animation-duration: 55s;
-  animation-timing-function:linear;
-}
 
-@keyframes cloud5-animation {
-  to {
-    right: -935px
-  }
-}
 
-@keyframes cloud5_-animation {
-  to {
-    right: 600px
-  }
-}
 
 .cloud6 {
   right: 750px;
@@ -422,27 +368,8 @@ export default {
   animation-timing-function:linear;
 }
 
-.cloud6_ {
-  right: 2286px;
-  top: 330px;
-  width: 120px;
-  animation-name:cloud6_-animation;
-  animation-iteration-count: infinite;
-  animation-duration: 45s;
-  animation-timing-function:linear;
-}
 
-@keyframes cloud6-animation {
-  to {
-    right: -786px
-  }
-}
 
-@keyframes cloud6_-animation {
-  to {
-    right: 750px
-  }
-}
 
 .logo {
   width: 500px;
