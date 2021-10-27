@@ -5,9 +5,9 @@
       <div style="background-color:#d4c579;height:150px"/>
       <img src="/img/sharks/3.png" class="shark shark2"/>
       <img src="/img/sharks/4.png" class="shark shark1"/>
-      <img src="/img/sharks/2.png" class="shark shark3"/>
+      <img src="/img/sharks/12.png" class="shark shark3"/>
       <img src="/img/sharks/16.png" class="shark shark4"/>
-      <img src="/img/sharks/3.png" class="shark shark5"/>
+      <img src="/img/sharks/8.png" class="shark shark5"/>
       <img src="/img/sharks/7.png" class="shark shark6"/>
       <img id="cloud1" src="img/props/cloud_transparent.png" class="cloud cloud1" />
       <img id="cloud2" src="img/props/cloud_transparent.png" class="cloud cloud2" />
@@ -59,18 +59,12 @@
         <div class="paragraph-container my-auto mx-5" style="text-align:left">
           <p class="montserrat" style="font-size:24px;font-weight:bold">Future utilization of sharkpunks NFTs may include, but are not limited to:</p>
           <br>
-          <div class="bullet-point-box py-4 my-3">
-          <p class="mx-3 open-sans bullet-points my-auto">Decorative painting in the basement of your mother</p>
-          </div>
-          <div class="bullet-point-box py-4 my-3">
-          <p class="mx-3 open-sans bullet-points my-auto">Comparison of phallus size</p>
-          </div>
-          <div class="bullet-point-box py-4 my-3">
-          <p class="mx-3 open-sans bullet-points my-auto">Companion as you contemplate your existential crisis</p>
-          </div>
+          <p class="open-sans">Decorative painting for your room in your mom's basement</p>
+          <p class="open-sans">Comparison of phallus size</p>
+          <p class="open-sans">Companion as you contemplate your existential crisis</p>
         </div>
         <div class="mx-5 my-auto">
-          <img v-bind:src="shark" style="width:300px"/>
+          <img v-bind:src="shark" style="width:300px;" />
         </div>
       </div>
     </div>
@@ -510,8 +504,13 @@ export default {
 }
 
 .paragraph-container p{
-  font-size: 18pxx  
+  font-size: 18px;
+}
 
+
+
+.utlity-container {
+  box-shadow: 0px 0px 5px 2px #c9c1bb;
 }
 
 .roadmap-bar {
@@ -559,7 +558,7 @@ export default {
 
 .bullet-points {
   font-size: 18px;
-  color:#8C808F
+  color:black
 }
 
 .bullet-point-box {
@@ -569,6 +568,11 @@ export default {
 
 }
 
+.h-divider {
+  width:100%;
+  height:1px;
+  background-color:black
+}
 
 
 }
